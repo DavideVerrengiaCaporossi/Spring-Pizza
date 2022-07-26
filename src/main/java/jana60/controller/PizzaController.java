@@ -95,21 +95,23 @@ public class PizzaController {
 	          "Pizza con id " + pizzaId + " not present");
 	    }
 }
-	 //modifica ciome serve a te
-	 @GetMapping("/edit/{id}")
-	  public String edit(@PathVariable("id") Integer bookId, Model model) {
-	    Optional<Book> result = repo.findById(bookId);
-	    // controllo se il Book con quell'id è presente
-	    if (result.isPresent()) {
-	      // preparo il template con al form passandogli il book trovato su db
-
-	      model.addAttribute("book", result.get());
-	      model.addAttribute("categoryList", categoryRepo.findAllByOrderByName());
-	      return "/book/edit";
-	    } else {
-	      throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-	          "Book con id " + bookId + " not present");
-	    }
+	 //modifica come serve a te come ha fatto vedere costanza
+	 
+	 
+//	 @GetMapping("/edit/{id}")
+//	  public String edit(@PathVariable("id") Integer bookId, Model model) {
+//	    Optional<Book> result = repo.findById(bookId);
+//	    // controllo se il Book con quell'id è presente
+//	    if (result.isPresent()) {
+//	      // preparo il template con al form passandogli il book trovato su db
+//
+//	      model.addAttribute("book", result.get());
+//	      model.addAttribute("categoryList", categoryRepo.findAllByOrderByName());
+//	      return "/book/edit";
+//	    } else {
+//	      throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+//	          "Book con id " + bookId + " not present");
+//	    }
 
 	  }
 }
