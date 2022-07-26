@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <th:block th:replace="fragments :: scr-head"></th:block>
+    <title>pizza</title>
+  </head>
+  <body>
+
+  <th:block th:replace="fragments :: navbar"></th:block>
+<div class="container">
+    <h1>ecco a voi le pizze</h1>
+   
+	<table class="table my-3">
+	          <thead>
+	            <tr>
+	              <th>Nome</th>
+	              <th>Descrizione</th>
+	              <th>Prezzo</th>
+	              
+	            </tr>
+	          </thead>
+	          <tbody>
+	            <tr class="align-middle" th:each="dep : ${pizzaList}">
+	              <td >
+	              	<a th:text="${dep.nome}"></a>
+	              </td>
+	              
+	              <td th:text="${dep.descrizione}"></td>
+	              <td th:text="${dep.prezzo}"></td>
+	              <td>
+	              	<a class="btn btn-primary" th:href="@{|/add/${dep.id}|}"type="submit">modifica</a>
+	  				<a class="btn btn-primary" th:href="@{|/delete/${dep.id}|}" role="button">elimina</a>
+	              </td>
+	            </tr>
+	          </tbody>	                    
+	        </table>
+	        <span><a class="btn btn-danger" th:href="@{/add}">aggiungi una pizza</a></span>
+  </div>    
+</body>
+</html>
