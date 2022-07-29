@@ -19,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jana60.model.Pizza;
+import jana60.repository.IngredientiRepository;
 import jana60.repository.PizzaRepository;
 
 
@@ -27,6 +28,10 @@ import jana60.repository.PizzaRepository;
 public class PizzaController {
 	@Autowired 
 	private PizzaRepository repo;
+	
+	@Autowired
+	private IngredientiRepository repoIngredienti;
+	
 	@GetMapping
 	public String pizzaList (Model model) {
 	    model.addAttribute("pizzaList", repo.findAll());
@@ -88,7 +93,7 @@ public class PizzaController {
 	    if (result.isPresent()) {
 	      // repo.deleteById(bookId);
 	      repo.delete(result.get());
-	      ra.addFlashAttribute("successMessage", "pizza " + result.get().getNome() + " deleted!");
+	      ra.addFlashAttribute("successMessage", "pizza" + result.get().getNome() + " deleted!");
 	      return "redirect:/";
 	    } else {
 	      throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -98,20 +103,21 @@ public class PizzaController {
 	 //modifica come serve a te come ha fatto vedere costanza
 	 
 	 
-//	 @GetMapping("/edit/{id}")
-//	  public String edit(@PathVariable("id") Integer bookId, Model model) {
-//	    Optional<Book> result = repo.findById(bookId);
-//	    // controllo se il Book con quell'id è presente
-//	    if (result.isPresent()) {
-//	      // preparo il template con al form passandogli il book trovato su db
-//
-//	      model.addAttribute("book", result.get());
-//	      model.addAttribute("categoryList", categoryRepo.findAllByOrderByName());
-//	      return "/book/edit";
-//	    } else {
-//	      throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-//	          "Book con id " + bookId + " not present");
-//	    }
+	 @GetMapping("/edit/{id}")
+	  public String modifica(@PathVariable("id") Integer pizzaId, Model model) {
+	    Optional<Pizza> result = repo.findById(pizzaId);
+	  
+	    if (result.isPresent()) {
+	     
+
+	      model.addAttribute("pizzaForm", result.get());
+	      model.addAttribute("pizzaList", repo.findAllByOrderByNome());
+	      model.addAttribute("ingredienti", repoIngredienti.findAllByOrderByNome());
+	      return "/editPizza";
+	    } else {
+	      throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+	          "Book con id " + pizzaId + " not present");
+	    }
 
 	  }
 }

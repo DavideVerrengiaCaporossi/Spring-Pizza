@@ -4,7 +4,7 @@
   <head>
    
     <th:block th:replace="fragments :: scr-head"></th:block>
-    <title>pizza</title>
+    <title>pizze</title>
   </head>
   <body>
 
@@ -16,6 +16,7 @@
 	          <thead>
 	            <tr>
 	              <th>Nome</th>
+	              <th>Ingredienti</th>
 	              <th>Descrizione</th>
 	              <th>Prezzo</th>
 	              
@@ -26,11 +27,15 @@
 	              <td >
 	              	<a th:text="${dep.nome}"></a>
 	              </td>
-	              
+	              <td>
+	              	<ul>
+	              		<li th:each="i : ${dep.ingredienti}" th:text="${i.nome}"></li>
+	              	</ul>
+	              </td>
 	              <td th:text="${dep.descrizione}"></td>
 	              <td th:text="${dep.prezzo}"></td>
 	              <td>
-	              	<a class="btn btn-primary" th:href="@{|/add/${dep.id}|}"type="submit">modifica</a>
+	              	<a class="btn btn-primary" th:href="@{|/edit/${dep.id}|}"type="submit">modifica</a>
 	  				<a class="btn btn-primary" th:href="@{|/delete/${dep.id}|}" role="button">elimina</a>
 	              </td>
 	            </tr>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <th:block th:replace="fragments :: scr-head"></th:block>
+    <title>pizza</title>
+  </head>
+  <body>
+
+  <th:block th:replace="fragments :: navbar"></th:block>
+<div class="container">
+    <h1>Questi sono tutti gli ingredienti</h1>
+   <form
+   		th:object = "${newIngrediente}"
+   		action = "/ingredienti/save"
+   		method = "POST">
+   		
+   		<input type = "text" th:field = "*{nome}">
+   			<!--richiamo al getmapping che aggiunge--> <!--aggiungi la form-->
+   	 <button class="btn btn-primary" type="submit" id="category-button" >Aggiungi un ingrediente</button>
+   	
+   	</form>
+   		
+   		
+	<table class="table my-3">
+	          <thead>
+	            <tr>
+	              <th>Nome</th>
+	             
+	              
+	            </tr>
+	          </thead>
+	          <tbody>								<!--collegamento al attributo del model-->
+	            <tr class="align-middle" th:each="dep : ${ingredienti}">
+	              <td >
+	              	<a th:text="${dep.nome}"></a>
+	              </td>
+	              
+	                          
+	            </tr>
+	          </tbody>	                    
+	        </table>	
+	        				
+	       
+  </div>    
+</body>
+</html>

@@ -9,6 +9,7 @@
 	</th:block>
     <title>Pizza Edit</title> 
   </head>
+  <body>
   <div class= "container w-25">
   <h1> Inserisci Pizze </h1>
   
@@ -51,6 +52,12 @@
 	           </ul>
         </div>
   			
+  </div>
+  <div>
+  	<div th:each="i : ${ingredienti}">
+	  	<input type="checkbox" th:field="*{ingredienti}" th:value="${i.id}" th:id="|ingrediente_${i.id}|">
+	  	<span th:text="${i.nome}"></span >
+  	</div>
   </div>
   <div>
   	<button type="submit" class="btn btn-primary me-2">Salva</button>
